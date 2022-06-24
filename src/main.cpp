@@ -1,8 +1,8 @@
 #include <init.h>
 
-static const int WINDOW_WIDTH{ 800 },
-				 WINDOW_HEIGHT{ 600 };
-static const char* WINDOW_TITLE = "testwindow";
+const int WINDOW_WIDTH{ 800 };
+const int WINDOW_HEIGHT{ 600 };
+const char* WINDOW_TITLE = "testwindow";
 
 int initialize(void)
 {

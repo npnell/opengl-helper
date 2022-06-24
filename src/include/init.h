@@ -5,9 +5,12 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
+void framebuffer_size_callback(GLFWwindow*, int, int);
+void process_input(GLFWwindow*);
+
 class context {
 private:
-	GLFWwindow* glfw_initialize(int, int, const char*);
+	GLFWwindow* glfw_init(int, int, const char*);
 public:
 	GLFWwindow* window;
 	context(int, int, const char*);	
@@ -22,10 +25,10 @@ public:
 
 context::context(int window_width, int window_height, const char *window_title)
 {
-	this->window = glfw_initialize(window_width, window_height, window_title);
+	this->window = glfw_init(window_width, window_height, window_title);
 }
 
-GLFWwindow* context::glfw_initialize(int window_width, int window_height, const char *window_title)
+GLFWwindow* context::glfw_init(int window_width, int window_height, const char *window_title)
 {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -47,11 +50,6 @@ viewport::viewport(const context& context, int window_width, int window_height)
 	glad_init(context, window_width, window_height);
 }
 
-void framebuffer_size_callback(GLFWwindow* window, int window_width, int window_height)
-{
-	glViewport(0, 0, window_width, window_height);
-}
-
 int viewport::glad_init(const context& context, int window_width, int window_height)
 {
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
@@ -61,6 +59,11 @@ int viewport::glad_init(const context& context, int window_width, int window_hei
 	glViewport(0, 0, window_width, window_height);
 	glfwSetFramebufferSizeCallback(context.window, framebuffer_size_callback);
 	return EXIT_SUCCESS;
+}
+
+void framebuffer_size_callback(GLFWwindow* window, int window_width, int window_height)
+{
+	glViewport(0, 0, window_width, window_height);
 }
 
 void process_input(GLFWwindow* window)
