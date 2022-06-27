@@ -8,4 +8,5 @@
 *test*
 
 # ignore worspace setting files
-**/.vs/
+.vs/
+*.vcxproj.user
